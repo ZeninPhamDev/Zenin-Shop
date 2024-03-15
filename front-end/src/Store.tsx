@@ -2,10 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { Cart, CartItem } from './types/Cart'
+import { UserInfo } from './types/UserInfo'
 
 type AppState = {
   mode: string
   cart: Cart
+  userInfo?: UserInfo
 }
 
 const initialState: AppState = {
@@ -30,12 +32,17 @@ const initialState: AppState = {
     taxPrice: 0,
     totalPrice: 0,
   },
+  userInfo: localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo')!)
+    : null,
 }
 
 type Action =
   | { type: 'SWITCH_MODE' }
   | { type: 'CART_ADD_ITEM'; payload: CartItem }
   | { type: 'CART_REMOVE_ITEM'; payload: CartItem }
+  | { type: 'USER_SIGNIN'; payload: UserInfo }
+  | { type: 'USER_SIGNOUT' }
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
@@ -63,6 +70,31 @@ function reducer(state: AppState, action: Action): AppState {
       localStorage.setItem('cartItems', JSON.stringify(cartItems))
       return { ...state, cart: { ...state.cart, cartItems } }
     }
+    case 'USER_SIGNIN':
+      return { ...state, userInfo: action.payload }
+    case 'USER_SIGNOUT':
+      return {
+        mode:
+          window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light',
+        cart: {
+          cartItems: [],
+          paymentMethod: 'PayPal',
+          shippingAddress: {
+            fullName: '',
+            address: '',
+            postalCode: '',
+            city: '',
+            country: '',
+          },
+          itemsPrice: 0,
+          shippingPrice: 0,
+          taxPrice: 0,
+          totalPrice: 0,
+        },
+      }
 
     default:
       return state
