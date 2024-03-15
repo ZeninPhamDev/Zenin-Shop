@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "cd back-end && npm install && npm run build --legacy-peer-deps  && cd ../front-end && npm install && npm run build --legacy-peer-deps",
+    "build": "cd back-end && npm install && npm run build  && cd ../front-end && npm install && npm run build",
     "start": "node back-end/build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
