@@ -35,7 +35,7 @@ export default function OrderPage() {
     refetch,
   } = useGetOrderDetailsQuery(orderId!)
 
-  const { mutateAsync: payOrder, isLoading: loadingPay } = usePayOrderMutation()
+  const { mutateAsync: payOrder, isPending: loadingPay } = usePayOrderMutation()
 
   const testPayHandler = async () => {
     await payOrder({ orderId: orderId! })
@@ -53,7 +53,7 @@ export default function OrderPage() {
         paypalDispatch({
           type: 'resetOptions',
           value: {
-            'client-id': paypalConfig!.clientId,
+            clientId: paypalConfig!.clientId,
             currency: 'USD',
           },
         })
@@ -75,9 +75,11 @@ export default function OrderPage() {
             {
               amount: {
                 value: order!.totalPrice.toString(),
+                currency_code: 'USD',
               },
             },
           ],
+          intent: 'CAPTURE',
         })
         .then((orderID: string) => {
           return orderID
