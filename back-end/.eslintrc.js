@@ -10,7 +10,4 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint'],
-  rule: {
-    '@typescript-eslint/no-unused-vars': 0,
-  },
 }

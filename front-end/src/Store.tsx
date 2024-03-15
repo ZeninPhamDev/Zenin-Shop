@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
-import { Cart, CartItem, ShippingAddress } from './types/Cart'
+import { Cart, CartItem } from './types/Cart'
 
 type AppState = {
   mode: string
