@@ -45,6 +45,7 @@ type Action =
   | { type: 'USER_SIGNOUT' }
   | { type: 'SAVE_SHIPPING_ADDRESS'; payload: ShippingAddress }
   | { type: 'SAVE_PAYMENT_METHOD'; payload: string }
+  | { type: 'CART_CLEAR' }
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
@@ -72,6 +73,8 @@ function reducer(state: AppState, action: Action): AppState {
       localStorage.setItem('cartItems', JSON.stringify(cartItems))
       return { ...state, cart: { ...state.cart, cartItems } }
     }
+    case 'CART_CLEAR':
+      return { ...state, cart: { ...state.cart, cartItems: [] } }
     case 'USER_SIGNIN':
       return { ...state, userInfo: action.payload }
     case 'USER_SIGNOUT':
