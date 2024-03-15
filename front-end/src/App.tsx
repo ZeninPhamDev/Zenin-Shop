@@ -159,7 +159,7 @@ function App() {
         </Container>
       </main>
 
-      <footer>
+      <footer className='mt-5'>
         <div className='text-center'>All rights revsered</div>
       </footer>
     </div>

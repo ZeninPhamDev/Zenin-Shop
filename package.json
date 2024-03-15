@@ -1,8 +1,21 @@
 {
-  "dependencies": {
-    "localforage": "^1.10.0",
-    "match-sorter": "^6.3.4",
-    "react-router-dom": "^6.22.3",
-    "sort-by": "^1.2.0"
-  }
+  "name": "project-zenin-shop",
+  "description": "Based learn project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd back-end && npm install && npm run build  && cd ../front-end && npm install && npm run build",
+    "start": "node back-end/build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZeninPhamDev/Zenin-Shop.git"
+  },
+  "author": "Zenin Pham Dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZeninPhamDev/Zenin-Shop/issues"
+  },
+  "homepage": "https://github.com/ZeninPhamDev/Zenin-Shop#readme"
 }

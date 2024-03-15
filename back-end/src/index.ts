@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import express from 'express'
+import express, { Request, Response } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
@@ -8,6 +8,8 @@ import { seedRouter } from './routers/seedRouter'
 import { userRouter } from './routers/userRouter'
 import { orderRouter } from './routers/orderRouter'
 import { keyRouter } from './routers/keyRouter'
+import path from 'path'
+import 'dotenv/config'
 
 dotenv.config()
 
@@ -40,7 +42,12 @@ app.use('/api/orders', orderRouter)
 app.use('/api/keys', keyRouter)
 app.use('/api/seed', seedRouter)
 
-const PORT = 4000
+app.use(express.static(path.join(__dirname, '../../front-end/dist')))
+app.get('*', (req: Request, res: Response) =>
+  res.sendFile(path.join(__dirname, '../../front-end/dist/index.html')),
+)
+
+const PORT: number = parseInt((process.env.PORT || '4000') as string, 10)
 app.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`)
 })
